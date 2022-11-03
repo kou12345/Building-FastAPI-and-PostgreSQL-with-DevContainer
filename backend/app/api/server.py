@@ -1,9 +1,10 @@
+from app.api.routes import router as api_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
 def get_application():
-    app = FastAPI(title="Hedgehog Reservation", version="1.0.0")
+    app = FastAPI(title="Hedgehog Reservation", version="1.0.0")  # type: ignore
 
     app.add_middleware(
         CORSMiddleware,
@@ -12,6 +13,8 @@ def get_application():
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    app.include_router(api_router, prefix="/api")
 
     return app
 
